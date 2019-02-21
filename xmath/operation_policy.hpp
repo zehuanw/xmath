@@ -1,42 +1,45 @@
 namespace xmath{
 
+template<int OP_, typename T_>
+struct OperationPolicy;
+
 template<typename T_>  
-struct ADD{
+struct OperationPolicy<Op::SUM, T_>{
   static T_ calc(T_ a, T_ b){
     return a + b;
   } 
   static std::string str(){
-    return " + "
+    return std::string(" + ");
   }
 };
 
 template<typename T_>  
-struct SUB{
+struct OperationPolicy<Op::SUB, T_>{
   static T_ calc(T_ a, T_ b){
     return a - b;
   } 
   static std::string str(){
-    return " - "
+    return std::string(" - ");
   }
 };
 
 template<typename T_>  
-struct MUL{
+struct OperationPolicy<Op::MUL, T_>{
   static T_ calc(T_ a, T_ b){
     return a * b;
   } 
   static std::string str(){
-    return " x "
+    return std::string(" x ");
   }
 };
 
 template<typename T_>  
-struct DIV{
+struct OperationPolicy<Op::DIV, T_>{
   static T_ calc(T_ a, T_ b){
     return a / b;
   } 
   static std::string str(){
-    return " / "
+    return std::string(" / ");
   }
 };
 
