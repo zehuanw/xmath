@@ -21,7 +21,7 @@ Supporting shuffle mode
 
 Supporting limit the range of result
 ## Build and Run
-shell`
+```shell
 $ cmake ..
 $ xmath --help
-`
+```
