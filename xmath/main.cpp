@@ -1,21 +1,23 @@
 #include "common.hpp"
 #include "xmath.hpp"
+#include <assert.h>
 #include <map>
 #include <stdexcept>
 
-std::string usage("Usage: xmath [Option]...\n Generage math examination for different level.\n \n   --a-config=CONFIG         Config operand A which can be either RAND / SEQ\n   --b-config=CONFIG         Config operand B which can be either RAND / SEQ\n   --a-range=PAIR            Set a's range: e.g. 1,10\n   --b-range=PAIR            Set b's range: e.g. 10,1\n   --c-range=PAIR            Set c's range: e.g. 10,1\n   --operation=OP            OP should be either SUM / MUL / SUB / DIV\n   --type=TYPE               TYPE can be INT or FLOAT\n   --help                    Show these information");
+std::string usage("Usage: xmath [Option]...\n Generage math examination for different level.\n \n   --a-config=CONFIG         Config operand A which can be either RAND / SEQ\n   --b-config=CONFIG         Config operand B which can be either RAND / SEQ\n   --a-range=PAIR            Set a's range: e.g. 1,10\n   --b-range=PAIR            Set b's range: e.g. 10,1\n   --c-range=PAIR            Set c's range: e.g. 10,1\n   --operation=OP            OP should be either SUM / MUL / SUB / DIV\n   --type=TYPE               TYPE can be INT or FLOAT\n   --items=NUM               Print NUM questions\n   --doc=NAME                Name of document\n   --help                    Show these information");
 
 using namespace xmath;
 int main(int argc, char* argv[]){
   try
   {
-    enum class OPT {A_RANGE, B_RANGE, C_RANGE, DOC_NAME, ITEMS};
+    enum class OPT {A_RANGE, B_RANGE, C_RANGE, DOC_NAME, ITEMS, HELP};
     std::vector<std::pair<std::string, OPT>> option_map = {
       {"--a-range=", OPT::A_RANGE},
       {"--b-range=", OPT::B_RANGE},
       {"--c-range=", OPT::C_RANGE},
       {"--doc=", OPT::DOC_NAME},
-      {"--items=", OPT::ITEMS}
+      {"--items=", OPT::ITEMS},
+      {"--help", OPT::HELP}
     };
 
     //default config
@@ -77,13 +79,21 @@ int main(int argc, char* argv[]){
 	      doc = args_string;
 	    }
 	    break;
+	  case OPT::HELP:
+	    {
+	      std::cout << usage;
+	    }
 	  default:
 	    {
 	      //wrong input
-	      std::cout << usage;
-	      throw std::runtime_error("Error: No such option");
+	      assert(!"wrong option");
 	    }
 	  }
+	}
+	else{
+	  //wrong input
+	  std::cout << usage;
+	  throw std::runtime_error("Error: No such option");
 	}
       }
       //cannot find in option_map
