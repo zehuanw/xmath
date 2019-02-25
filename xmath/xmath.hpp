@@ -106,7 +106,7 @@ public:
     std::string doc_;
     if(valid(a, b, param.c_limits)){
       param.counter++;
-      doc_ += std::to_string(a) + PolicyOP_::str() + std::to_string(b) + "\n";
+      doc_ += std::to_string(a) + PolicyOP_::str() + std::to_string(b) + " =\n";
     }
     std::cout << doc_;
   }
