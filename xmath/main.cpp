@@ -96,7 +96,6 @@ int main(int argc, char* argv[]){
 	  throw std::runtime_error("Error: No such option");
 	}
       }
-      //cannot find in option_map
     }
 
 

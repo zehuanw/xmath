@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+PROJECT(xmath)
+SET(CMAKE_C_COMPILER g++)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+ADD_SUBDIRECTORY(xmath)
