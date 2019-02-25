@@ -1,14 +1,14 @@
 XMATH
 ===========
-# Goal
+## Goal
 Children can learn how to calculate easily.
-# Requirements
+## Requirements
 Allowing math learning easy to hard
 
 Application should be easy to use 
 * Sufficient runtime options: no need compilation
 * Can generate exam documents easily.
-# Features
+## Features
 Supporting Add / Sub / Mul / Div
 
 Supporting integer / float
@@ -20,3 +20,8 @@ Supporting questions generation randomly
 Supporting shuffle mode
 
 Supporting limit the range of result
+## Build and Run
+shell`
+$ cmake ..
+$ xmath --help
+`
