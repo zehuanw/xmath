@@ -3,7 +3,10 @@
 #include "common.hpp"
 #include "operand_policy.hpp"
 #include "operation_policy.hpp"
+#include <fstream>
 #include <iostream>
+
+
 namespace xmath{
 
 template<int A_Config_, int B_Config_, int T_, int OP_>
@@ -20,7 +23,7 @@ struct param_trait<A_Config_, B_Config_, OperandType::INT, Op::SUM>{
     return std::make_pair<Type, Type>(1,9);
   }
   static Pair default_b(){
-    return std::make_pair<Type, Type>(1,1);
+    return std::make_pair<Type, Type>(9,1);
   }
   static Pair default_c(){
     return std::make_pair<Type, Type>(1,10);
@@ -101,14 +104,20 @@ class Xmath{
   typedef PolicyB_ PolicyB;
 public:
   static void generate(Param<T_>& param){
-    T_ a = PolicyA::gen(param.counter, param.a_limits);
-    T_ b = PolicyB::gen(param.counter, param.b_limits);
     std::string doc_;
-    if(valid(a, b, param.c_limits)){
-      param.counter++;
-      doc_ += std::to_string(a) + PolicyOP_::str() + std::to_string(b) + " =\n";
+    int idx = 0;
+    while(param.counter < param.items){
+      T_ a = PolicyA::gen(idx, param.a_limits);
+      T_ b = PolicyB::gen(idx, param.b_limits);
+      if(valid(a, b, param.c_limits)){
+	doc_ += std::to_string(a) + PolicyOP_::str() + std::to_string(b) + " =\n";
+	param.counter++;
+      }
+      idx++;
     }
-    std::cout << doc_;
+    std::ofstream fs(param.doc);
+    fs << doc_;
+    fs.close();
   }
 };
 
